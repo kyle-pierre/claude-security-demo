@@ -1,0 +1,22 @@
+
+name: Import Claude Security Findings
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload Claude Security SARIF
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: CLAUDE-SECURITY-RESULTS.sarif
+          category: claude-security
